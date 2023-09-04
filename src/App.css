@@ -1,0 +1,27 @@
+.outlet_height{
+    min-height: 100vh;
+}
+
+
+
+/* technology CSS */
+/* flex flex-wrap justify-center bg-gray-200 py-4 */
+.tab_list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px 0;
+}
+/* cursor-pointer px-4 py-2 m-2 rounded-lg bg-white shadow-md */
+.m_tab{
+    cursor: pointer;
+    padding: 0 20px;
+    height: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px;
+    border-radius: 20px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
