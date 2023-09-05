@@ -1,131 +1,47 @@
 import { useEffect, useState } from "react";
 import bgImg from "/images/bg/choose-us-bg.jpg";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-// import axios from "axios";
-// import { base_url } from "../shared/Url";
-
-const technology = [
-  {
-    id: 1,
-    category: "Frontend",
-    title: "React",
-    logo: "https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png",
-  },
-  {
-    id: 1,
-    category: "Frontend",
-    title: "React",
-    logo: "https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png",
-  },
-  {
-    id: 1,
-    category: "Frontend",
-    title: "React",
-    logo: "https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png",
-  },
-  {
-    id: 1,
-    category: "Frontend",
-    title: "React",
-    logo: "https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png",
-  },
-  {
-    id: 1,
-    category: "Frontend",
-    title: "React",
-    logo: "https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png",
-  },
-  {
-    id: 1,
-    category: "Frontend",
-    title: "React",
-    logo: "https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png",
-  },
-  {
-    id: 1,
-    category: "Frontend",
-    title: "React",
-    logo: "https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png",
-  },
-  {
-    id: 1,
-    category: "Frontend",
-    title: "Vue js",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/888px-Vue.js_Logo_2.svg.png",
-  },
-  {
-    id: 1,
-    category: "Frontend",
-    title: "Vue js",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/888px-Vue.js_Logo_2.svg.png",
-  },
-  {
-    id: 1,
-    category: "Frontend",
-    title: "Vue js",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/888px-Vue.js_Logo_2.svg.png",
-  },
-  {
-    id: 1,
-    category: "Frontend",
-    title: "Vue js",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/888px-Vue.js_Logo_2.svg.png",
-  },
-  {
-    id: 2,
-    category: "Backend",
-    title: "Django",
-    logo: "/upload/upload/django-logo.png",
-  },
-  {
-    id: 3,
-    category: "Database",
-    title: "Mysql",
-    logo: "/upload/upload/mysql.png",
-  },
-  {
-    id: 4,
-    category: "Mobile Application",
-    title: "Flutter",
-    logo: "/upload/upload/flutter.png",
-  },
-];
+import axios from "axios";
+import { base_url } from "../shared/Url";
 
 const TechnologyWeWork = () => {
   const [tech, setTech] = useState([]);
-  const [filteredTech, setFilteredTech] = useState([]);
   const [categories, setCategories] = useState(["All Category"]);
   const [selectedCategory, setSelectedCategory] = useState("All Category");
+  const [showMore, setShowMore] = useState({});
 
-  // const url = "https://vitasoftserver.onrender.com/work-technology";
+  const url = "https://vitasoftserver.onrender.com/work-technology";
 
   useEffect(() => {
-    // axios
-    //   .get(url)
-    //   .then((res) => {
-    // const techData = res.data;
-    // setTech(techData);
-    // const allCategories = [...new Set(techData.map((item) => item.category))];
-    //     setCategories(allCategories);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    setTech(technology);
-    const allCategories = [...new Set(technology.map((item) => item.category))];
-    setCategories(["All Category", ...allCategories]);
+    axios
+      .get(url)
+      .then((res) => {
+        const technology = res.data;
+        console.log(technology, "______technology");
+        setTech(technology);
+        const allCategories = [
+          ...new Set(technology.map((item) => item.category)),
+        ];
+        setCategories(["All Category", ...allCategories]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   useEffect(() => {
-    const filtered =
-      selectedCategory === "All Category"
-        ? tech
-        : tech.filter((techItem) => techItem.category === selectedCategory);
-    setFilteredTech(filtered);
-  }, [tech, selectedCategory]);
+    setShowMore({});
+  }, [selectedCategory]);
 
   const filterTechByCategory = (category) => {
     setSelectedCategory(category);
+  };
+
+  const toggleShowMore = (category) => {
+    setShowMore((prevShowMore) => ({
+      ...prevShowMore,
+      [category]: !prevShowMore[category],
+    }));
   };
 
   const bgStyles = {
@@ -171,29 +87,45 @@ const TechnologyWeWork = () => {
                     {categories.map((category) => (
                       <TabPanel key={category}>
                         <div className="category">
-                          {category === "All Category"
-                            ? tech.map((techItem) => (
-                                <div key={techItem.id} className="techItem">
-                                  <img
-                                    src={techItem.logo}
-                                    alt={techItem.title}
-                                  />
-                                  <b>{techItem.title}</b>
-                                </div>
-                              ))
-                            : filteredTech
-                                .filter(
-                                  (techItem) => techItem.category === category
-                                )
-                                .map((techItem) => (
-                                  <div key={techItem.id} className="techItem">
-                                    <img
-                                      src={techItem.logo}
-                                      alt={techItem.title}
-                                    />
-                                    <b>{techItem.title}</b>
-                                  </div>
-                                ))}
+                          {tech
+                            .filter((techItem) =>
+                              selectedCategory === "All Category"
+                                ? true
+                                : techItem.category === selectedCategory
+                            )
+                            .slice(0, showMore[category] ? tech.length : 10)
+                            .map((techItem) => (
+                              <div key={techItem.id} className="techItem">
+                                <img
+                                  src={base_url + techItem.logo}
+                                  alt={techItem.title}
+                                />
+                                <b>{techItem.title}</b>
+                              </div>
+                            ))}
+                          {tech.filter((techItem) =>
+                            selectedCategory === "All Category"
+                              ? true
+                              : techItem.category === selectedCategory
+                          ).length > 10 && (
+                            <div style={{ width: "100%" }}>
+                              <button
+                                className="see_btn"
+                                onClick={() => toggleShowMore(category)}
+                              >
+                                {showMore[category] ? (
+                                  <>
+                                    See Less <i className="fas fa-arrow-left" />
+                                  </>
+                                ) : (
+                                  <>
+                                    See More{" "}
+                                    <i className="fas fa-arrow-right" />
+                                  </>
+                                )}
+                              </button>
+                            </div>
+                          )}
                         </div>
                       </TabPanel>
                     ))}
