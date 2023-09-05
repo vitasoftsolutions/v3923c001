@@ -11,7 +11,7 @@ const Nav_bar = () => {
       const logo = res.data[0].logo;
       setSite_logo(logo);
     });
-  },[]);
+  }, []);
 
   return (
     <nav>
@@ -34,6 +34,9 @@ const Nav_bar = () => {
                 </li>
                 <li>
                   <Link to="/services">Services</Link>
+                </li>
+                <li>
+                  <Link to="/ourteam">OurTeam</Link>
                 </li>
 
                 <li>

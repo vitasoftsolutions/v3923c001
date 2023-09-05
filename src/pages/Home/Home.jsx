@@ -5,7 +5,7 @@ import OurTeam from "../../components/Home/OurTeam";
 import TechnologyWeWork from "../../components/Home/TechnologyWeWork";
 import Testimonial from "../../components/Home/Testimonial";
 import WhoWeAre from "../../components/Home/WhoWeAre";
-import Services from "../../components/Services/Services";
+import ServicesHome from "../../components/Home/ServicesHome";
 
 
 
@@ -13,7 +13,7 @@ const Home = () => {
   return (
     <div>
       <Banner />
-      <Services />
+      <ServicesHome />
       <WhoWeAre />
       <Counter />
       <TechnologyWeWork />

@@ -1,11 +1,11 @@
-import React from 'react';
+import AllPageBanner from "../../components/shared/AllPageBanner";
 
 const Career = () => {
-    return (
-        <div>
-            <h1>Carrer coming..</h1>
-        </div>
-    );
+  return (
+    <div>
+      <AllPageBanner pageTitle="Career" breadcrumb="Career" />
+    </div>
+  );
 };
 
 export default Career;
