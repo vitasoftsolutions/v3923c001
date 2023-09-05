@@ -1,27 +1,58 @@
-.outlet_height{
-    min-height: 100vh;
+.outlet_height {
+  min-height: 100vh;
 }
-
-
 
 /* technology CSS */
 /* flex flex-wrap justify-center bg-gray-200 py-4 */
-.tab_list{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px 0;
+.tab_list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px 0;
 }
 /* cursor-pointer px-4 py-2 m-2 rounded-lg bg-white shadow-md */
-.m_tab{
-    cursor: pointer;
-    padding: 0 20px;
-    height: 30px;
-    font-size: 16px;
-    font-weight: bold;
-    margin: 10px;
-    border-radius: 20px 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.m_tab {
+  cursor: pointer;
+  padding: 0 20px;
+  height: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 10px;
+  border-radius: 20px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.category {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6rem;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+}
+.techItem {
+  display: flex;
+  flex-direction: column;
+  height: 60px;
+  width: 60px;
+  margin: 5px 20px;
+}
+.techItem > img {
+  height: 100%;
+  width: 100%;
+  padding: 5px;
+  border-radius: 50%;
+  box-shadow: 2px 2px 5px rgb(214, 214, 214);
+}
+
+@media only screen and (max-width: 600px) {
+  .category {
+    width: 100%;
+    gap: 3rem;
+  }
+  .techItem {
+    margin: 5px 0px;
+  }
 }
