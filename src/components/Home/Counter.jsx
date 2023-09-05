@@ -2,6 +2,9 @@ import image1 from "/images/counter-1.png";
 import image2 from "/images/counter-2.png";
 import image3 from "/images/counter-3.png";
 import image4 from "/images/counter-1.png";
+import CountUp from "react-countup";
+import VisibilitySensor from 'react-visibility-sensor';
+
 
 const Counter = () => {
   return (
@@ -16,7 +19,15 @@ const Counter = () => {
                   <img src={image1} alt="" />
                 </div>
                 <div className="counter-content">
-                  <span className="counter">1790</span>
+                  <span className="counter">
+                    <CountUp end={100} redraw={true}>
+                      {({ countUpRef, start }) => (
+                        <VisibilitySensor onChange={start} delayedCall>
+                          <span ref={countUpRef} />
+                        </VisibilitySensor>
+                      )}
+                    </CountUp>
+                  </span>
                   <p>Happy clients</p>
                 </div>
               </div>
@@ -29,7 +40,15 @@ const Counter = () => {
                   <img src={image2} alt="" />
                 </div>
                 <div className="counter-content">
-                  <span className="counter">491</span>
+                  <span className="counter">
+                    <CountUp end={100} redraw={true}>
+                      {({ countUpRef, start }) => (
+                        <VisibilitySensor onChange={start} delayedCall>
+                          <span ref={countUpRef} />
+                        </VisibilitySensor>
+                      )}
+                    </CountUp>
+                  </span>
                   <p>Finished projects</p>
                 </div>
               </div>
@@ -42,7 +61,15 @@ const Counter = () => {
                   <img src={image3} alt="" />
                 </div>
                 <div className="counter-content">
-                  <span className="counter">245</span>
+                  <span className="counter">
+                    <CountUp end={100} redraw={true}>
+                      {({ countUpRef, start }) => (
+                        <VisibilitySensor onChange={start} delayedCall>
+                          <span ref={countUpRef} />
+                        </VisibilitySensor>
+                      )}
+                    </CountUp>
+                  </span>
                   <p>Skilled Experts</p>
                 </div>
               </div>
@@ -55,7 +82,15 @@ const Counter = () => {
                   <img src={image4} alt="" />
                 </div>
                 <div className="counter-content">
-                  <span className="counter">1090</span>
+                  <span className="counter">
+                    <CountUp end={100} redraw={true}>
+                      {({ countUpRef, start }) => (
+                        <VisibilitySensor onChange={start} delayedCall>
+                          <span ref={countUpRef} />
+                        </VisibilitySensor>
+                      )}
+                    </CountUp>
+                  </span>
                   <p>Media Posts</p>
                 </div>
               </div>

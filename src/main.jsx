@@ -6,7 +6,11 @@ import "aos/dist/aos.css"; // Import AOS styles
 import AOS from "aos"; // Import AOS library
 import { router } from "./routes/Routes";
 
-AOS.init(); // Initialize AOS
+// Initialize AOS
+AOS.init();
+// Import Swiper styles
+import "swiper/css";
+import 'swiper/css/pagination';
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

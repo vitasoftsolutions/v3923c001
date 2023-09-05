@@ -10,11 +10,9 @@ const TechnologyWeWork = () => {
   const [selectedCategory, setSelectedCategory] = useState("All Category");
   const [showMore, setShowMore] = useState({});
 
-  const url = "https://vitasoftserver.onrender.com/work-technology";
-
   useEffect(() => {
     axios
-      .get(url)
+      .get(`${base_url}/work-technology`)
       .then((res) => {
         const technology = res.data;
         console.log(technology, "______technology");

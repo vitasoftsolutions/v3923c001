@@ -8,7 +8,6 @@ const Nav_bar = () => {
   useEffect(() => {
     axios.get(`${base_url}/global-data`).then((res) => {
       //global-data
-      console.log(res.data[0].logo)
       const logo = res.data[0].logo;
       setSite_logo(logo);
     });
@@ -21,7 +20,7 @@ const Nav_bar = () => {
           <div className="header-wrap">
             <div className="header-logo">
               <Link to={"/"}>
-                <img src={site_logo} alt="Vitasoft Logo" />
+                <img src={base_url + site_logo} alt="Vitasoft Logo" />
               </Link>
             </div>
 
