@@ -1,12 +1,19 @@
-import image1 from "/images/counter-1.png";
-import image2 from "/images/counter-2.png";
-import image3 from "/images/counter-3.png";
-import image4 from "/images/counter-1.png";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { base_url } from "../shared/Url";
 import CountUp from "react-countup";
 import VisibilitySensor from 'react-visibility-sensor';
 
 
 const Counter = () => {
+
+  const [counterData, setCounterData] = useState([]);
+  useEffect(() => {
+    axios.get(`${base_url}/work-counter`).then((res) => {
+      setCounterData(res.data[0].item);
+    });
+  }, []);
+
   return (
     <div className="section techwix-counter-section-02">
       <div className="container">
@@ -16,11 +23,11 @@ const Counter = () => {
               {/* Single Counter Start */}
               <div className="single-counter">
                 <div className="counter-img">
-                  <img src={image1} alt="" />
+                  <img src={base_url + counterData[0]?.image} alt="" />
                 </div>
                 <div className="counter-content">
                   <span className="counter">
-                    <CountUp end={100} redraw={true}>
+                    <CountUp end={counterData[1]?.number} redraw={true}>
                       {({ countUpRef, start }) => (
                         <VisibilitySensor onChange={start} delayedCall>
                           <span ref={countUpRef} />
@@ -28,7 +35,7 @@ const Counter = () => {
                       )}
                     </CountUp>
                   </span>
-                  <p>Happy clients</p>
+                  <p>{counterData[0]?.title}</p>
                 </div>
               </div>
               {/* Single Counter End */}
@@ -37,11 +44,11 @@ const Counter = () => {
               {/* Single Counter Start */}
               <div className="single-counter">
                 <div className="counter-img">
-                  <img src={image2} alt="" />
+                  <img src={base_url + counterData[1]?.image} alt="" />
                 </div>
                 <div className="counter-content">
                   <span className="counter">
-                    <CountUp end={100} redraw={true}>
+                    <CountUp end={counterData[1]?.number} redraw={true}>
                       {({ countUpRef, start }) => (
                         <VisibilitySensor onChange={start} delayedCall>
                           <span ref={countUpRef} />
@@ -49,7 +56,7 @@ const Counter = () => {
                       )}
                     </CountUp>
                   </span>
-                  <p>Finished projects</p>
+                  <p>{counterData[1]?.title}</p>
                 </div>
               </div>
               {/* Single Counter End */}
@@ -58,11 +65,11 @@ const Counter = () => {
               {/* Single Counter Start */}
               <div className="single-counter">
                 <div className="counter-img">
-                  <img src={image3} alt="" />
+                  <img src={base_url + counterData[2]?.image} alt="" />
                 </div>
                 <div className="counter-content">
                   <span className="counter">
-                    <CountUp end={100} redraw={true}>
+                    <CountUp end={counterData[2]?.number} redraw={true}>
                       {({ countUpRef, start }) => (
                         <VisibilitySensor onChange={start} delayedCall>
                           <span ref={countUpRef} />
@@ -70,7 +77,7 @@ const Counter = () => {
                       )}
                     </CountUp>
                   </span>
-                  <p>Skilled Experts</p>
+                  <p>{counterData[2]?.title}</p>
                 </div>
               </div>
               {/* Single Counter End */}
@@ -79,11 +86,11 @@ const Counter = () => {
               {/* Single Counter Start */}
               <div className="single-counter single-counter-4">
                 <div className="counter-img">
-                  <img src={image4} alt="" />
+                  <img src={base_url + counterData[3]?.image} alt="" />
                 </div>
                 <div className="counter-content">
                   <span className="counter">
-                    <CountUp end={100} redraw={true}>
+                    <CountUp end={counterData[3]?.number} redraw={true}>
                       {({ countUpRef, start }) => (
                         <VisibilitySensor onChange={start} delayedCall>
                           <span ref={countUpRef} />
@@ -91,7 +98,7 @@ const Counter = () => {
                       )}
                     </CountUp>
                   </span>
-                  <p>Media Posts</p>
+                  <p>{counterData[3]?.title}</p>
                 </div>
               </div>
               {/* Single Counter End */}
