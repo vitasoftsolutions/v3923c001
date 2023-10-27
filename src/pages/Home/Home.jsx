@@ -10,6 +10,7 @@ import ServicesHome from "../../components/Home/ServicesHome";
 
 
 const Home = () => {
+
   return (
     <div>
       <Banner />

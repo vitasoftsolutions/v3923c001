@@ -1,6 +1,6 @@
 import React from "react";
 
-const Cta = () => {
+const Cta = ({ siteData }) => {
   return (
     <div className="section techwix-cta-section-04 techwix-cta-section-06 techwix-cta-section-07">
       <div className="container">
@@ -28,7 +28,7 @@ const Cta = () => {
                 </div>
                 <div className="cta-text">
                   <p>Call Us For Any inquiry</p>
-                  <h3 className="number">+44 920 090 505</h3>
+                  <h3 className="number">{siteData?.company_number}</h3>
                 </div>
               </div>
               {/* Cta Right End */}

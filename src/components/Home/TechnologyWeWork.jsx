@@ -15,7 +15,6 @@ const TechnologyWeWork = () => {
       .get(`${base_url}/work-technology`)
       .then((res) => {
         const technology = res.data;
-        console.log(technology, "______technology");
         setTech(technology);
         const allCategories = [
           ...new Set(technology.map((item) => item.category)),

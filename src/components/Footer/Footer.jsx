@@ -3,16 +3,25 @@ import { base_url } from "../shared/Url";
 import axios from "axios";
 
 const Footer = () => {
-  const [site_logo, setSite_logo] = useState([]);
+  const [siteData, setSiteData] = useState([]);
+  const [siteAddress, setSiteAddress] = useState([]);
+  const [socialData, setSocialData] = useState([]);
   useEffect(() => {
     axios.get(`${base_url}/global-data`).then((res) => {
       //global-data
-      const logo = res.data[0].logo_dark;
-      setSite_logo(logo);
+      const data = res.data[0];
+      setSiteData(data);
+      const address = data?.address;
+      setSiteAddress(address);
+      const social = data?.social;
+      setSocialData(social);
     });
   }, []);
+
+  console.log(socialData, "socialData");
+
   return (
-    <>
+    <div className="my_footer">
       <div className="section techwix-cta-section-02">
         <div className="container">
           <div
@@ -28,13 +37,13 @@ const Footer = () => {
                   <div className="cta-icon">
                     <img src="/images/cta-icon2.png" alt="" />
                   </div>
-                  <p>We’re Delivering the best customer Experience</p>
+                  <p>{siteData?.welcome_text}</p>
                 </div>
               </div>
               <div className="col-xl-3 col-lg-4">
                 <div className="cta-btn">
                   <a className="btn btn-white" href="#">
-                    +00 000 000 000
+                    {siteData?.company_number}
                   </a>
                 </div>
               </div>
@@ -55,30 +64,24 @@ const Footer = () => {
               <div className="col-lg-3 col-sm-6">
                 <div className="footer-widget-about">
                   <a className="footer-logo" href="index.html">
-                    <img src={base_url + site_logo} alt="Logo" />
+                    <img src={base_url + siteData?.logo_dark} alt="Logo" />
                   </a>
                   <p>
-                    Accelerate innovation with world-class tech teams We’ll
-                    match you to an entire remote team of incredible freelance
-                    talent.
+                    {siteData?.footer_description
+                      ? siteData?.footer_description
+                      : "Accelerate innovation with world-class tech teams We’ll match you to an entire remote team of incredible freelance talent."}
                   </p>
                   <div className="footer-social">
                     <ul className="social">
-                      <li>
-                        <a href="#">
-                          <i className="fab fa-facebook-f"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i className="fab fa-twitter"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i className="fab fa-linkedin-in"></i>
-                        </a>
-                      </li>
+                      {socialData?.map((soc) => {
+                        return (
+                          <li key={soc?.id}>
+                            <a href={soc?.link}>
+                              <i className={soc?.icon_class}></i>
+                            </a>
+                          </li>
+                        );
+                      })}
                     </ul>
                   </div>
                 </div>
@@ -139,7 +142,7 @@ const Footer = () => {
                         </div>
                         <div className="info-text">
                           <span>
-                            <a href="#">+00 000 000 000</a>
+                            <a href="#">{siteData?.company_number}</a>
                           </span>
                         </div>
                       </li>
@@ -149,7 +152,11 @@ const Footer = () => {
                         </div>
                         <div className="info-text">
                           <span>
-                            <a href="#">info@example.com</a>
+                            <a href="#">
+                              {siteData?.company_email
+                                ? siteData?.company_email
+                                : ""}
+                            </a>
                           </span>
                         </div>
                       </li>
@@ -158,7 +165,9 @@ const Footer = () => {
                           <i className="flaticon-pin"></i>
                         </div>
                         <div className="info-text">
-                          <span>60 East 65th Street, NY</span>
+                          <span>
+                            {siteAddress.length > 0 ? siteAddress[0]?.address : ""}
+                          </span>
                         </div>
                       </li>
                     </ul>
@@ -176,8 +185,8 @@ const Footer = () => {
                 <div className="col-lg-12">
                   <div className="copyright-text text-center">
                     <p>
-                      © Copyrights 2023 <b>VitaSoft Solutions</b> All rights
-                      reserved.{" "}
+                      © Copyrights 2023 <b>{siteData?.company_name}</b> All
+                      rights reserved.{" "}
                     </p>
                   </div>
                 </div>
@@ -197,7 +206,7 @@ const Footer = () => {
           <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
         </svg>
       </div>
-    </>
+    </div>
   );
 };
 

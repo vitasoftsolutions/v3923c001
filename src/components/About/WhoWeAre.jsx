@@ -1,4 +1,4 @@
-const WhoWeAre = () => {
+const WhoWeAre = ({ whoWeAre, siteData }) => {
   return (
     <div className="section techwix-about-section-07 section-padding">
       <div className="shape-1"></div>
@@ -28,15 +28,9 @@ const WhoWeAre = () => {
               <div className="about-content-wrap">
                 <div className="section-title">
                   <h3 className="sub-title">Who we are</h3>
-                  <h2 className="title">
-                    Highly Tailored IT Design, Management & Support Services.
-                  </h2>
+                  <h2 className="title">{whoWeAre?.title}</h2>
                 </div>
-                <p className="text">
-                  Accelerate innovation with world-class tech teams We’ll match
-                  you to an entire remote team of incredible freelance talent
-                  for all your software development needs.
-                </p>
+                <p className="text">{whoWeAre.desscription}</p>
                 {/* About List Start */}
                 <div className="about-list-03">
                   <div className="row">

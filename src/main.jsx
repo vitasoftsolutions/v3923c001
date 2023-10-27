@@ -10,10 +10,8 @@ import { router } from "./routes/Routes";
 AOS.init();
 // Import Swiper styles
 import "swiper/css";
-import 'swiper/css/pagination';
+import "swiper/css/pagination";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <>
-    <RouterProvider router={router} />
-  </>
+  <RouterProvider router={router} />
 );

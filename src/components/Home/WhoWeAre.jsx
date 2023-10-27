@@ -1,7 +1,25 @@
-import image_in_video_sec2 from "/images/about-big2.jpg";
-import image_in_video_sec3 from "/images/about-sm2.jpg";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { base_url } from "../shared/Url";
 
 const WhoWeAre = () => {
+  const [testimonialData, setTestimonialData] = useState([]);
+  const [siteData, setSiteData] = useState([]);
+
+  useEffect(() => {
+    axios.get(`${base_url}/who-we-are`).then((res) => {
+      setTestimonialData(res?.data[0]);
+    });
+  }, []);
+
+  useEffect(() => {
+    axios.get(`${base_url}/global-data`).then((res) => {
+      //global-data
+      const data = res?.data[0];
+      setSiteData(data);
+    });
+  }, []);
+
   return (
     <div className="section techwix-about-section-04 section-padding">
       <div className="shape-1"></div>
@@ -14,25 +32,19 @@ const WhoWeAre = () => {
               <div className="about-content-wrap">
                 <div className="section-title">
                   <h3 className="sub-title">Who we are</h3>
-                  <h2 className="title">
-                    Highly Tailored IT Design, Management & Support Services.
-                  </h2>
+                  <h2 className="title">{testimonialData?.title}</h2>
                 </div>
-                <p className="text">
-                  Accelerate innovation with world-className tech teams We’ll
-                  match you to an entire remote team of incredible freelance
-                  talent for all your software development needs.
-                </p>
+                <p className="text">{testimonialData?.desscription}</p>
                 {/* About Author Info Wrap Start */}
                 <div className="about-author-info-wrap">
                   <div className="about-author">
                     <img src="assets/images/sign.png" alt="" />
-                    <h3 className="name">Alen Morno sin</h3>
-                    <span className="designation">CEO, Techmax</span>
+                    <h3 className="name">{siteData?.ceo_name ? siteData?.ceo_name : "SEO Name"}</h3>
+                    <span className="designation">CEO, {siteData?.company_name}</span>
                   </div>
                   <div className="about-info">
                     <p>Call to ask any question </p>
-                    <h3 className="number">0123-456-7890</h3>
+                    <h3 className="number">{siteData?.company_number}</h3>
                   </div>
                 </div>
                 {/* About Author Info Wrap End */}
@@ -45,16 +57,16 @@ const WhoWeAre = () => {
                 <div className="play-btn-02">
                   <a
                     className="popup-video"
-                    href="https://www.youtube.com/watch?time_continue=3&amp;v=_X0eYtY8T_U"
+                    href={testimonialData?.video}
                   >
                     <i className="fas fa-play"></i>
                   </a>
                 </div>
                 <div className="about-img about-img-big">
-                  <img src={image_in_video_sec2} alt="" />
+                <img src={base_url + testimonialData?.image_vertical} alt="" />
                 </div>
                 <div className="about-img about-img-sm">
-                  <img src={image_in_video_sec3} alt="" />
+                  <img src={base_url + testimonialData?.image_horizontal} alt="" />
                 </div>
               </div>
               {/* About Image Wrap End */}

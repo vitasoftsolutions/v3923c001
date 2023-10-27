@@ -1,9 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { base_url } from "./Url";
 
 const Nav_bar = () => {
+
+  const location = useLocation();
+
   const [site_logo, setSite_logo] = useState([]);
   useEffect(() => {
     axios.get(`${base_url}/global-data`).then((res) => {
@@ -25,24 +28,23 @@ const Nav_bar = () => {
             </div>
 
             <div className="header-menu d-none d-lg-block">
-              <ul className="main-menu">
-                <li className="active-menu">
-                  <Link to="/">Home</Link>
-                </li>
-                <li>
-                  <Link to="/about">About Us</Link>
-                </li>
-                <li>
-                  <Link to="/services">Services</Link>
-                </li>
-                <li>
-                  <Link to="/ourteam">OurTeam</Link>
-                </li>
-
-                <li>
-                  <Link to="/career">Career</Link>
-                </li>
-              </ul>
+            <ul className="main-menu">
+            <li className={location.pathname === '/' ? 'active-menu' : ''}>
+              <Link to="/">Home</Link>
+            </li>
+            <li className={location.pathname === '/about' ? 'active-menu' : ''}>
+              <Link to="/about">About Us</Link>
+            </li>
+            <li className={location.pathname === '/services' ? 'active-menu' : ''}>
+              <Link to="/services">Services</Link>
+            </li>
+            <li className={location.pathname === '/ourteam' ? 'active-menu' : ''}>
+              <Link to="/ourteam">OurTeam</Link>
+            </li>
+            <li className={location.pathname === '/career' ? 'active-menu' : ''}>
+              <Link to="/career">Career</Link>
+            </li>
+          </ul>
             </div>
             {/* Contact Us Button */}
             <div className="header-meta">
