@@ -18,7 +18,6 @@ const Footer = () => {
     });
   }, []);
 
-  console.log(socialData, "socialData");
 
   return (
     <div className="my_footer">
