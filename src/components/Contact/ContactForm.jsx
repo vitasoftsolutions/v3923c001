@@ -1,5 +1,6 @@
 import { useRef } from "react";
-import emailjs from '@emailjs/browser';
+import emailjs from "@emailjs/browser";
+import Swal from "sweetalert2";
 
 function ContactForm() {
   const form = useRef();
@@ -9,17 +10,29 @@ function ContactForm() {
 
     emailjs
       .sendForm(
-        "service_2560p7g",
-        "template_nkqwfsi",
+        "service_wwqdu65",
+        "template_yu9xi1e",
         form.current,
-        "0u5wVZv6KJ1cBUPdV"
+        "zm3VN97UXp-R42W0z"
       )
       .then(
         (result) => {
-          console.log(result.text);
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `${result.text}`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          // Reset the form after a successful submission
+          form.current.reset();
         },
         (error) => {
-          console.log(error.text);
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: `${error.text}`,
+          });
         }
       );
   };
